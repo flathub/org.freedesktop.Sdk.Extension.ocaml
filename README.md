@@ -26,7 +26,8 @@ Typically, your global opam switches can be found in `~/.var/app/<editor flatpak
 Add `.opam` as a persistent path for your editor of choice in [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
 
 Using [vscodium](https://flathub.org/apps/com.vscodium.codium) as an example:
-![The persistent path setting in flatseal, showing a edited field with value `.opam` and a grey out uneditable field with value `.vscode-oss`](./img/opam-persistent-path-vscodium.png)
+
+<img src="./img/opam-persistent-path-vscodium.png" width="400" alt="The persistent path setting in flatseal, showing a edited field with value `.opam` and a grey out uneditable field with value `.vscode-oss`"/>
 
 ### Initializing the Environment
 
