@@ -14,42 +14,30 @@ In order to use this extension in a Flatpak SDK environment you may add all prov
 $ source /usr/lib/sdk/ocaml/enable.sh
 ```
 
-## Install packages interactivelly
+## Configure the Opam Environment
 
-### Initializing the Environment
+**NOTE: Opam environment (the `.opam` folder) is sandboxed per editor.** 
+
+For example, vscodium might have different opam environment than emacs,
+even when they use the same ocaml sdk extension.
+[opam local swtich](https://opam.ocaml.org/blog/opam-local-switches/) can partially circumvent this issue.
+
+Typically, global opam switches can be found in `~/.var/app/<editor flatpak id>/.opam`
+
+## Add Persistent `.opam` Path
+
+Add `.opam` as a persistent path for your editor of choice in [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
+
+Using [vscodium](https://flathub.org/apps/com.vscodium.codium) as an example:
+
+<img src="./img/opam-persistent-path-vscodium.png" width="400" alt="The persistent path setting in flatseal, showing a edited field with value `.opam` and a grey out uneditable field with value `.vscode-oss`"/>
+
+## Initializing Opam Environment
 
 In order to interactivelly install [OCaml Package Manager (opam)](https://opam.ocaml.org/) packages in a Flatpak environmment you will need to initialize a new environment:
 ```
-$ opam init --disable-sandboxing --no-setup --root $XDG_DATA_HOME/ocaml
+$ opam init --disable-sandboxing
 ```
-
-### Load the Environment Per Session
-
-_The environment will be forgotten after you restart the app, if you use this method_
-
-Run the following command to load the create the environment
-```
-$ eval $(opam env --root=$XDG_DATA_HOME/ocaml --switch=default --set-root --set-switch)
-
-$ opam switch
-#  switch   compiler     description
-→  default  ocaml.5.1.0  default
-```
-
-### Load the Environment Permanently
-
-Run the following command to get the path of your environment, using vscodium as an example
-```
-$ flatpak run --command=bash com.vscodium.codium
-
-[📦 com.vscodium.codium ~]$ echo $XDG_DATA_HOME/ocaml
-/var/home/<username>/.var/app/com.vscodium.codium/data/ocaml
-```
-
-Copy the output `/var/home/<username>/.var/app/com.vscodium.codium/data/ocaml`, 
-and add `OPAMROOT=/var/home/<username>/.var/app/com.vscodium.codium/data/ocaml` 
-as a environment variable for the app in [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
-
 
 ## Development
 To use the SDK with your favourite editor:
