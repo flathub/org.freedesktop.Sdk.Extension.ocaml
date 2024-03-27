@@ -17,9 +17,12 @@ $ source /usr/lib/sdk/ocaml/enable.sh
 ## Configure the Opam Environment
 
 **NOTE: Opam environment (the `.opam` folder) is sandboxed per editor.** 
-For example, your vscodium might have different opam environment than your emacs.
+
+For example, vscodium might have different opam environment than emacs,
+even when they use the same ocaml sdk extension.
 [opam local swtich](https://opam.ocaml.org/blog/opam-local-switches/) can partially circumvent this issue.
-Typically, your global opam switches can be found in `~/.var/app/<editor flatpak id>/.opam`
+
+Typically, global opam switches can be found in `~/.var/app/<editor flatpak id>/.opam`
 
 ## Add Persistent `.opam` Path
 
@@ -29,7 +32,7 @@ Using [vscodium](https://flathub.org/apps/com.vscodium.codium) as an example:
 
 <img src="./img/opam-persistent-path-vscodium.png" width="400" alt="The persistent path setting in flatseal, showing a edited field with value `.opam` and a grey out uneditable field with value `.vscode-oss`"/>
 
-## Initializing the Environment
+## Initializing Opam Environment
 
 In order to interactivelly install [OCaml Package Manager (opam)](https://opam.ocaml.org/) packages in a Flatpak environmment you will need to initialize a new environment:
 ```
