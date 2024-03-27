@@ -16,6 +16,11 @@ $ source /usr/lib/sdk/ocaml/enable.sh
 
 ## Configure the Opam Environment
 
+**NOTE: Opam environment (the `.opam` folder) is sandboxed per editor.** 
+For example, your vscodium might have different opam environment than your emacs.
+[opam local swtich](https://opam.ocaml.org/blog/opam-local-switches/) can partially circumvent this issue.
+Typically, your global opam switches can be found in `~/.var/app/<editor flatpak id>/.opam`
+
 ### Add `.opam` as a Persistent Path for Your Editor
 
 Add `.opam` as a persistent path for your editor of choice in [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
