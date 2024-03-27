@@ -21,7 +21,7 @@ For example, your vscodium might have different opam environment than your emacs
 [opam local swtich](https://opam.ocaml.org/blog/opam-local-switches/) can partially circumvent this issue.
 Typically, your global opam switches can be found in `~/.var/app/<editor flatpak id>/.opam`
 
-### Add `.opam` as a Persistent Path for Your Editor
+## Add Persistent `.opam` Path
 
 Add `.opam` as a persistent path for your editor of choice in [flatseal](https://flathub.org/apps/com.github.tchx84.Flatseal)
 
@@ -29,7 +29,7 @@ Using [vscodium](https://flathub.org/apps/com.vscodium.codium) as an example:
 
 <img src="./img/opam-persistent-path-vscodium.png" width="400" alt="The persistent path setting in flatseal, showing a edited field with value `.opam` and a grey out uneditable field with value `.vscode-oss`"/>
 
-### Initializing the Environment
+## Initializing the Environment
 
 In order to interactivelly install [OCaml Package Manager (opam)](https://opam.ocaml.org/) packages in a Flatpak environmment you will need to initialize a new environment:
 ```
