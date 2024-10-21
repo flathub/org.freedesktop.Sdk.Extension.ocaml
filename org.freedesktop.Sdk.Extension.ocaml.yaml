@@ -7,7 +7,6 @@ build-extension: true
 sdk: org.freedesktop.Sdk
 runtime-version: "24.08"
 separate-locales: false
-appstream-compose: false
 build-options:
   append-path: /usr/lib/sdk/ocaml/bin
   prefix: /usr/lib/sdk/ocaml
