@@ -54,9 +54,25 @@ modules:
       - type: archive
         url: https://github.com/ocaml/dune/archive/refs/tags/3.16.0.tar.gz
         sha256: cf141fe2113d95faab9714bc3203f4665ba58c7e0c4450f9a719f1ba075cd214
+      # bootstrapping problem: dune-rpc-lwt requires lwt requires dune
+      - type: patch
+        path: ocaml-dune-no-lwt.patch
     build-commands:
+      - rm -fr otherlibs/dune-rpc-lwt dune-rpc-lwt.opam
+      # configure doesn't know prefix?
+      - ./configure
+          --bindir=${FLATPAK_DEST}/bin
+          --sbindir=${FLATPAK_DEST}/bin
+          --libdir=${FLATPAK_DEST}/lib/ocaml
+          --docdir=${FLATPAK_DEST}/share/doc
+          --mandir=${FLATPAK_DEST}/share/man
+          --datadir=${FLATPAK_DEST}/share/data
+          --etcdir=${FLATPAK_DEST}/etc
       - make release
+      - ./dune.exe build --verbose --release @install
       - PREFIX=${FLATPAK_DEST} make install
+      # install the libraries too (e.g. dune-configurator)
+      - ./dune.exe install
 
   - name: scripts
     sources:
