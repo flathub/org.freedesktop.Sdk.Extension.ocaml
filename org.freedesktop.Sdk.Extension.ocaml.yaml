@@ -36,7 +36,7 @@ modules:
         only-arches:
           - aarch64
         url: https://github.com/ocaml/opam/releases/download/2.4.1/opam-2.4.1-arm64-linux
-        sha256: cbfa6d5c1869715a9e3454879d59e0f32a020a3224bbbc43eb9ddb3a069813ee
+        sha256: 627894846d728bfeb3192d5cfa7d7ff671a7eaa9a1e77ece015a1bd1a8faa933
     build-commands:
       - chmod +x opam
       - mv opam* ${FLATPAK_DEST}/bin
