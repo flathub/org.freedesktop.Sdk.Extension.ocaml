@@ -1,11 +1,11 @@
 # flatpak-builder --force-clean build-dir org.freedesktop.Sdk.Extension.ocaml.yaml
 # flatpak-builder --user --install --force-clean build-dir org.freedesktop.Sdk.Extension.ocaml.yaml
 id: org.freedesktop.Sdk.Extension.ocaml
-branch: "24.08"
+branch: "25.08"
 runtime: org.freedesktop.Sdk
 build-extension: true
 sdk: org.freedesktop.Sdk
-runtime-version: "24.08"
+runtime-version: "25.08"
 separate-locales: false
 appstream-compose: false
 build-options:
@@ -19,8 +19,8 @@ modules:
       - "--disable-xxhash"
     sources:
       - type: archive
-        url: https://download.samba.org/pub/rsync/src/rsync-3.2.7.tar.gz
-        sha256: 4e7d9d3f6ed10878c58c5fb724a67dacf4b6aac7340b13e488fb2dc41346f2bb
+        url: https://download.samba.org/pub/rsync/src/rsync-3.4.1.tar.gz
+        sha256: 2924bcb3a1ed8b551fc101f740b9f0fe0a202b115027647cf69850d65fd88c52
 
   - name: opam
     buildsystem: simple
@@ -29,60 +29,17 @@ modules:
         dest-filename: opam
         only-arches:
           - x86_64
-        url: https://github.com/ocaml/opam/releases/download/2.2.1/opam-2.2.1-x86_64-linux
-        sha256: 01d6a02adcfe978f7a2ee5f82aa8e807e0ac26cf6bb8b4ede4781318b6405e3f
+        url: https://github.com/ocaml/opam/releases/download/2.4.1/opam-2.4.1-x86_64-linux
+        sha256: 30da8eb20c8f4cfd3818db867d85f26df1ca5ca27cb25910c0235c5a02e12d3b
       - type: file
         dest-filename: opam
         only-arches:
           - aarch64
-        url: https://github.com/ocaml/opam/releases/download/2.2.1/opam-2.2.1-arm64-linux
-        sha256: cbfa6d5c1869715a9e3454879d59e0f32a020a3224bbbc43eb9ddb3a069813ee
+        url: https://github.com/ocaml/opam/releases/download/2.4.1/opam-2.4.1-arm64-linux
+        sha256: 627894846d728bfeb3192d5cfa7d7ff671a7eaa9a1e77ece015a1bd1a8faa933
     build-commands:
       - chmod +x opam
       - mv opam* ${FLATPAK_DEST}/bin
-
-  - name: ocaml
-    buildsystem: autotools
-    sources:
-      - type: archive
-        url: https://github.com/ocaml/ocaml/archive/refs/tags/5.2.0.tar.gz
-        sha256: 48554abfd530fcdaa08f23f801b699e4f74c320ddf7d0bd56b0e8c24e55fc911
-
-  - name: dune
-    buildsystem: simple
-    sources:
-      - type: archive
-        url: https://github.com/ocaml/dune/archive/refs/tags/3.16.0.tar.gz
-        sha256: cf141fe2113d95faab9714bc3203f4665ba58c7e0c4450f9a719f1ba075cd214
-      # bootstrapping problem: dune-rpc-lwt requires lwt requires dune
-      - type: patch
-        path: ocaml-dune-no-lwt.patch
-    build-commands:
-      - rm -fr otherlibs/dune-rpc-lwt dune-rpc-lwt.opam
-      # configure doesn't know prefix?
-      - ./configure
-          --bindir=${FLATPAK_DEST}/bin
-          --sbindir=${FLATPAK_DEST}/bin
-          --libdir=${FLATPAK_DEST}/lib/ocaml
-          --docdir=${FLATPAK_DEST}/share/doc
-          --mandir=${FLATPAK_DEST}/share/man
-          --datadir=${FLATPAK_DEST}/share/data
-          --etcdir=${FLATPAK_DEST}/etc
-      - make release
-      - ./dune.exe build --verbose --release @install
-      - PREFIX=${FLATPAK_DEST} make install
-      # install the libraries too (e.g. dune-configurator)
-      - ./dune.exe install
-
-  - name: scripts
-    sources:
-      - type: script
-        commands:
-          - export PATH=$PATH:/usr/lib/sdk/ocaml/bin
-        dest-filename: enable.sh
-    buildsystem: simple
-    build-commands:
-      - cp enable.sh ${FLATPAK_DEST}
 
   - name: appdata
     buildsystem: simple
